@@ -3,7 +3,7 @@
 #include <omp.h>
 using namespace std;
 
-                         
+
 
 void swap(int* a, int* b)  //Function to swap two numbers
 {
@@ -14,7 +14,7 @@ void swap(int* a, int* b)  //Function to swap two numbers
 
 int partition(int arr[], int start, int end )  // Function to partition the array based on pivot
 {
-	
+
 	int pivot = arr[end]; // We have initialised the pivot as the last element of array
 	int i = (start - 1);  // Index of smaller element
 
@@ -32,24 +32,24 @@ int partition(int arr[], int start, int end )  // Function to partition the arra
 
 void quicksort(int arr[], int start, int end)
 {
-	
+
 	int index;
 
 	if (start < end) {
 
-	
+
 		index = partition(arr, start, end); // Getting the index of partitioned element 
 
 		#pragma omp parallel sections   // sections construct ditributes the block between existing threads. Each block should be independent.  
 		{
 			#pragma omp section    //section marks different blocks which represents a task
 			{
-				
+
 				quicksort(arr, start, index - 1); //sorting the left half of the array
 			}
 			#pragma omp section
 			{
-				
+
 				quicksort(arr, index + 1, end);  //sorting the right half of the array
 			}
 		}
@@ -59,15 +59,15 @@ void quicksort(int arr[], int start, int end)
 
 int main()
 {
-	
+
 	int n;
 
 	cout<<"Enter the size of the array: "<<endl;
         cin>>n;
-	
+
 	int arr[n];;
 
-	
+
 	for (int i = 0; i < n; i++) {
 		cout<<"Enter the array element: "<<endl;
 		cin >> arr[i];
@@ -81,6 +81,7 @@ int main()
 		cout << arr[i] << " ";
 	}
 
-	
+
 }
+
 
